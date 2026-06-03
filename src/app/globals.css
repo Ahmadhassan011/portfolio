@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #1a1817;
+  --bg-secondary: #221f1e;
+  --bg-card: #221f1e;
+  --bg-skills: #151312;
+  --orange: #e05a2b;
+  --orange-hover: #c84e22;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --border: #3a3533;
+}
+
+[data-theme="light"] {
+  --bg: #f5f4f0;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-skills: #eae8e3;
+  --orange: #e05a2b;
+  --orange-hover: #c84e22;
+  --text-primary: #1a1817;
+  --text-secondary: #7a7674;
+  --border: #e0ddd8;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-orange: var(--orange);
+  --color-orange-hover: var(--orange-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+  --font-body: "Inter", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#skills .colored {
+  filter: brightness(0.75);
+  transition: filter 0.3s, transform 0.3s;
+}
+#skills .colored:hover {
+  filter: brightness(1);
+  transform: scale(1.1);
+}
+
+[data-theme="light"] #skills .colored {
+  filter: none;
+}
+[data-theme="light"] #skills .colored:hover {
+  filter: none;
+  transform: scale(1.1);
+}
+
+*::selection {
+  background-color: var(--orange);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border-radius: 3px;
 }
