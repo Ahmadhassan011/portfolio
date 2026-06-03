@@ -3,10 +3,6 @@
 export default function Footer() {
   const year = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-skills)]">
       <div className="max-w-6xl mx-auto px-6 py-10 flex items-center justify-between">
@@ -32,14 +28,7 @@ export default function Footer() {
               <i className={s.icon} />
             </a>
           ))}
-          <button
-            onClick={scrollToTop}
-            title="Back to top"
-            className="text-sm text-[var(--text-secondary)] hover:text-[var(--orange)] transition-colors"
-            aria-label="Back to top"
-          >
-            &uarr;
-          </button>
+
         </div>
       </div>
     </footer>

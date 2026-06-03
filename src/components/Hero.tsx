@@ -88,8 +88,8 @@ export default function Hero() {
             variants={itemVariants}
             className="text-[var(--text-secondary)] leading-relaxed max-w-md text-lg"
           >
-            Computer Science student with a growing interest in Machine Learning
-            and intelligent systems. Turning curiosity into impactful solutions.
+            Building Machine Learning and intelligent systems.
+            Turning curiosity into impactful solutions.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex gap-4 pt-4">

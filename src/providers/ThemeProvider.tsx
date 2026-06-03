@@ -41,11 +41,7 @@ export default function ThemeProvider({
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   if (!mounted) {
-    return (
-      <div style={{ visibility: "hidden" }}>
-        {children}
-      </div>
-    );
+    return <>{children}</>;
   }
 
   return (

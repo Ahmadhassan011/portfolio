@@ -130,9 +130,12 @@ export default function Works() {
     <section id="works" className="py-28 border-t border-[var(--border)]">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-primary)] mb-16">
+          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4 text-center">
             Projects
           </h2>
+          <p className="text-[var(--text-secondary)] text-sm max-w-xl mx-auto mb-16 text-center">
+            A collection of what I&apos;ve built
+          </p>
         </Reveal>
 
         <motion.div
@@ -170,6 +173,11 @@ export default function Works() {
                       {tag}
                     </span>
                   ))}
+                  {project.tags.length > 4 && (
+                    <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-[var(--orange)]/10 border border-[var(--orange)]/30 text-[var(--orange)] font-semibold">
+                      +{project.tags.length - 4}
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex items-center justify-between pt-1">

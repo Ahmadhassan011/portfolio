@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import ThemeProvider from "@/providers/ThemeProvider";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Ahmad Hassan | Portfolio",
   description:
-    "Computer Science student with a growing interest in Machine Learning and intelligent systems. Building at the intersection of ML and full stack development.",
+    "Building Machine Learning and intelligent systems. Full stack developer focused on ML and scalable applications.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ahmad Hassan | Portfolio",
     description:
-      "Computer Science student with a passion for ML and intelligent systems.",
+      "Building Machine Learning and intelligent systems.",
     type: "website",
   },
 };
@@ -44,6 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`} data-scroll-behavior="smooth">
       <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(){var t=localStorage.getItem("theme");if(t==="light"||(!t&&window.matchMedia("(prefers-color-scheme:light)").matches))document.documentElement.setAttribute("data-theme","light")})()`
+        }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -67,7 +71,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased min-h-screen">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   );

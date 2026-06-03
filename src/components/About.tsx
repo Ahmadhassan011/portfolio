@@ -38,7 +38,6 @@ export default function About() {
                   <span className="text-[var(--orange)]">ML & Intelligent Systems</span>
                 </h2>
               </div>
-
               <p className="text-[var(--text-secondary)] leading-relaxed max-w-xl">
                 Computer Science student at Namal University with a growing
                 interest in Machine Learning and intelligent systems. Looking to
