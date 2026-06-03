@@ -16,7 +16,25 @@ const fields = [
   { label: "Phone Number", name: "phone", type: "tel", placeholder: "Your Phone Number" },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] as const },
+  },
+};
+
 export default function Contact() {
+  const showForm = false; // toggle to true to re-enable contact form
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -52,119 +70,134 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-28 border-t border-[var(--border)]">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="py-28 border-t border-[var(--border)] relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--orange)]/3 blur-[120px]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <Reveal>
-          <div className="mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-primary)]">
-              Contact
+          <div className="text-center mb-16">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--orange)] mb-4 block">
+              Get in Touch
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-[var(--text-primary)] leading-tight">
+              Let&apos;s work<br className="sm:hidden" /> together
             </h2>
+            <div className="w-16 h-1 bg-[var(--orange)] mx-auto mt-6 rounded-full" />
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          <Reveal direction="left" className="space-y-10">
-            <p className="text-[var(--text-secondary)] leading-relaxed max-w-md">
-              Have a project in mind or just want to say hello? Fill out the form
-              and I&apos;ll get back to you as soon as possible.
-            </p>
+        <div className="flex flex-col items-center text-center">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            className="space-y-12 max-w-lg mx-auto"
+          >
+            <motion.p variants={itemVariants} className="text-[var(--text-secondary)] leading-relaxed text-base">
+              I&apos;m currently open to new opportunities and collaborations.
+              Whether you have a project in mind or just want to connect, I&apos;d love to hear from you.
+            </motion.p>
 
-            <div className="flex gap-6 items-center">
+            <motion.div variants={itemVariants} className="flex items-center justify-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-xs font-medium uppercase tracking-widest text-[var(--text-secondary)]">
+                Available for opportunities
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex items-center justify-center gap-8">
               {socials.map((s) => (
-                <a
+                <motion.a
                   key={s.label}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   title={s.label}
-                  className="text-xl text-[var(--text-secondary)] hover:text-[var(--orange)] transition-colors"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex flex-col items-center gap-2 group"
                   aria-label={s.label}
                 >
-                  <i className={s.icon} />
-                </a>
-              ))}
-            </div>
-
-            <div className="space-y-4">
-              {[
-                { label: "Email", value: "ahmadhassan6531@gmail.com" },
-                { label: "Phone", value: "+92 310 653 1680" },
-                { label: "Location", value: "Mianwali, PK" },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-4 text-sm">
-                  <span className="text-[var(--orange)] font-semibold min-w-[70px]">
-                    {item.label}:
+                  <span className="w-12 h-12 flex items-center justify-center rounded-full bg-[var(--bg-secondary)] border border-[var(--border)] text-[var(--text-secondary)] group-hover:text-[var(--orange)] group-hover:border-[var(--orange)] transition-all duration-300">
+                    <i className={`${s.icon} text-lg`} />
                   </span>
-                  <span className="text-[var(--text-secondary)]">
-                    {item.value}
+                  <span className="text-[10px] font-medium uppercase tracking-widest text-[var(--text-secondary)] group-hover:text-[var(--orange)] transition-colors">
+                    {s.label}
                   </span>
-                </div>
+                </motion.a>
               ))}
-            </div>
-          </Reveal>
+            </motion.div>
 
-          <Reveal direction="right">
-            <motion.form
-              onSubmit={handleSubmit}
-              className="bg-[var(--orange)] p-10 sm:p-12 rounded-2xl text-white space-y-10"
-            >
-              {fields.map((field) => (
-                <div key={field.name} className="space-y-1.5">
+
+          </motion.div>
+
+          {showForm && (
+            <Reveal direction="right" className="mt-16 w-full max-w-xl mx-auto">
+              <motion.form
+                onSubmit={handleSubmit}
+                className="bg-[var(--orange)] p-10 sm:p-12 rounded-2xl text-white space-y-10"
+              >
+                {fields.map((field) => (
+                  <div key={field.name} className="space-y-1.5">
+                    <label className="text-[9px] font-mono uppercase tracking-[0.2em] opacity-80">
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      value={formData[field.name as keyof typeof formData]}
+                      onChange={handleChange}
+                      onFocus={() => setFocused(field.name)}
+                      onBlur={() => setFocused(null)}
+                      placeholder={field.placeholder}
+                      className={underlineClass(field.name)}
+                      required
+                    />
+                  </div>
+                ))}
+
+                <div className="space-y-1.5">
                   <label className="text-[9px] font-mono uppercase tracking-[0.2em] opacity-80">
-                    {field.label}
+                    Message
                   </label>
-                  <input
-                    type={field.type}
-                    name={field.name}
-                    value={formData[field.name as keyof typeof formData]}
+                  <textarea
+                    name="message"
+                    value={formData.message}
                     onChange={handleChange}
-                    onFocus={() => setFocused(field.name)}
+                    onFocus={() => setFocused("message")}
                     onBlur={() => setFocused(null)}
-                    placeholder={field.placeholder}
-                    className={underlineClass(field.name)}
+                    placeholder="Type Your Message..."
+                    rows={3}
+                    className={`${underlineClass("message")} resize-none`}
                     required
                   />
                 </div>
-              ))}
 
-              <div className="space-y-1.5">
-                <label className="text-[9px] font-mono uppercase tracking-[0.2em] opacity-80">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  onFocus={() => setFocused("message")}
-                  onBlur={() => setFocused(null)}
-                  placeholder="Type Your Message..."
-                  rows={3}
-                  className={`${underlineClass("message")} resize-none`}
-                  required
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-4 pt-2">
-                {submitted && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-sm font-medium"
+                <div className="flex items-center justify-end gap-4 pt-2">
+                  {submitted && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="text-sm font-medium"
+                    >
+                      ✓ Message sent!
+                    </motion.span>
+                  )}
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="bg-white text-black px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-[#f0f0f0] transition-colors"
                   >
-                    ✓ Message sent!
-                  </motion.span>
-                )}
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-white text-black px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-[#f0f0f0] transition-colors"
-                >
-                  Send message
-                </motion.button>
-              </div>
-            </motion.form>
-          </Reveal>
+                    Send message
+                  </motion.button>
+                </div>
+              </motion.form>
+            </Reveal>
+          )}
         </div>
       </div>
     </section>
