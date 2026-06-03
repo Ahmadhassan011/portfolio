@@ -127,11 +127,13 @@ export default function Skills() {
               </h3>
               <div className="flex flex-wrap items-center gap-5">
                 {group.items.map((skill, i) => (
-                  <i
+                  <span
                     key={i}
                     title={skill.name}
-                    className={`${skill.icon} colored text-2xl`}
-                  />
+                    className="flex items-center justify-center w-8 h-8"
+                  >
+                    <i className={`${skill.icon} text-2xl`} />
+                  </span>
                 ))}
               </div>
             </motion.div>

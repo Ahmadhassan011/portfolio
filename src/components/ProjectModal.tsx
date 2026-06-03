@@ -6,7 +6,7 @@ import { useEffect } from "react";
 interface ProjectData {
   title: string;
   description: string;
-  fullDescription: string;
+  highlights: string[];
   tags: string[];
   liveUrl: string;
   githubUrl: string;
@@ -65,56 +65,70 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </svg>
             </button>
 
-            <div className="p-6 sm:p-8 space-y-6 pt-8">
-              <div className="flex items-start justify-between gap-4">
+            <div className="p-6 sm:p-8 pt-8">
+              <div className="mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-[var(--text-secondary)] mt-1">
+                  {project.year} &middot; {project.description}
+                </p>
+              </div>
+
+              <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-[var(--text-secondary)] mt-1">
-                    {project.year} &middot; {project.description}
-                  </p>
+                  <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--orange)] mb-4">
+                    Key Features
+                  </h4>
+                  <ul className="space-y-3">
+                    {project.highlights.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-[var(--text-secondary)] leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--orange)] mt-2 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
 
-              <p className="text-[var(--text-secondary)] leading-relaxed">
-                {project.fullDescription}
-              </p>
+                <div>
+                  <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--orange)] mb-4">
+                    Technology Stack
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[11px] uppercase tracking-wider px-3 py-1.5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--text-secondary)]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[var(--orange)]">
-                  Tech Stack
-                </span>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] uppercase tracking-wider px-3 py-1.5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--text-secondary)]"
+                <div className="flex gap-3 pt-2">
+                  {project.liveUrl !== "#" && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-2.5 bg-[var(--orange)] text-white text-sm font-semibold rounded-lg hover:bg-[var(--orange-hover)] transition-colors"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      Live Preview
+                    </a>
+                  )}
+                  {project.githubUrl !== "#" && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="View source on GitHub"
+                      className="px-4 py-2.5 border border-[var(--border)] text-[var(--text-primary)] rounded-lg hover:border-[var(--orange)] hover:text-[var(--orange)] transition-colors flex items-center"
+                    >
+                      <i className="fab fa-github text-lg" />
+                    </a>
+                  )}
                 </div>
-              </div>
-
-              <div className="flex gap-3 pt-2">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-2.5 bg-[var(--orange)] text-white text-sm font-semibold rounded-lg hover:bg-[var(--orange-hover)] transition-colors"
-                >
-                  Live Preview
-                </a>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="View source on GitHub"
-                  className="px-4 py-2.5 border border-[var(--border)] text-[var(--text-primary)] rounded-lg hover:border-[var(--orange)] hover:text-[var(--orange)] transition-colors flex items-center"
-                >
-                  <i className="fab fa-github text-lg" />
-                </a>
               </div>
             </div>
           </motion.div>

@@ -34,7 +34,7 @@ export default function About() {
                   About me
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-semibold leading-tight mt-3 text-[var(--text-primary)]">
-                  CS Student with a passion for{" "}
+                  CS Student specializing in{" "}
                   <span className="text-[var(--orange)]">ML & Intelligent Systems</span>
                 </h2>
               </div>
