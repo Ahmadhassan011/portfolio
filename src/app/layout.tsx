@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   title: "Ahmad Hassan | Portfolio",
   description:
     "Computer Science student with a growing interest in Machine Learning and intelligent systems. Building at the intersection of ML and full stack development.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Ahmad Hassan | Portfolio",
     description:
@@ -22,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1a1817",
+  themeColor: "#e05a2b",
   width: "device-width",
   initialScale: 1,
 };
