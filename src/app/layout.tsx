@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import ThemeProvider from "@/providers/ThemeProvider";
 import ScrollToTop from "@/components/ScrollToTop";
+import LenisProvider from "@/components/LenisProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -72,8 +73,10 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased min-h-screen">
         <ThemeProvider>
-          {children}
-          <ScrollToTop />
+          <LenisProvider>
+            {children}
+            <ScrollToTop />
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>
