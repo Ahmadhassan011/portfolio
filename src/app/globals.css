@@ -53,6 +53,13 @@ body {
   transform: scale(1.1);
 }
 
+.hero-img {
+  mix-blend-mode: screen;
+}
+[data-theme="light"] .hero-img {
+  mix-blend-mode: multiply;
+}
+
 *::selection {
   background-color: var(--orange);
   color: #fff;

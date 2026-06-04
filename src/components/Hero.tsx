@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-
-const ThreeScene = dynamic(() => import("./ThreeScene"), { ssr: false });
 
 const roles = ["CS Student", "ML Engineer", "Full Stack Developer"];
 
@@ -112,28 +109,16 @@ export default function Hero() {
           variants={itemVariants}
           className="relative flex items-center justify-center"
         >
-          <div className="relative">
-            <div className="w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-gradient-to-br from-[var(--orange)]/5 via-transparent to-transparent flex items-center justify-center">
-              <ThreeScene />
-            </div>
-            <motion.div
-              className="absolute -top-2 -right-2 w-20 h-20 bg-[var(--orange)]/10 rounded-full border border-[var(--orange)]/30 flex items-center justify-center backdrop-blur-sm"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <span className="text-xs font-bold text-[var(--orange)]">CS</span>
-            </motion.div>
-            <motion.div
-              className="absolute -bottom-1 -left-4 w-16 h-16 bg-[var(--orange)]/10 rounded-full border border-[var(--orange)]/30 flex items-center justify-center backdrop-blur-sm"
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
-            >
-              <span className="text-[10px] font-bold text-[var(--orange)] text-center leading-tight">
-                ML
-                <br />
-                AI
-              </span>
-            </motion.div>
+          <div className="relative w-full max-w-2xl mx-auto">
+            <motion.img
+              src="/hero-image.png"
+              alt="Ahmad Hassan"
+              className="w-full h-auto relative grayscale hover:grayscale-0 contrast-[1.1] brightness-[1.05] transition-all duration-700 hero-img"
+              style={{
+                maskImage: "radial-gradient(ellipse 80% 70% at 50% 45%, black 30%, transparent 80%)",
+                WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 45%, black 30%, transparent 80%)",
+              }}
+            />
           </div>
         </motion.div>
       </motion.div>
